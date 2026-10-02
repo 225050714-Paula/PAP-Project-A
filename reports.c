@@ -23,7 +23,7 @@ void employeeReport(int employeeIDs[], char names[][50], float salaries[], int c
     float highest;
     float lowest;
     int highestIndex = 0.00;
-    int lowestIndex = 0.00; 
+    int lowestIndex = 0.00;
 
     printf("\n===============================\n");
     printf("      Employee Report\n");
