@@ -18,12 +18,12 @@ void displayReportsMenu(void)
 
 void employeeReport(int employeeIDs[], char names[][50], float salaries[], int count)
 {
-    float totalSalaries = 0;
+    float totalSalaries = 0.00;
     float average;
     float highest;
     float lowest;
-    int highestIndex = 0;
-    int lowestIndex = 0; 
+    int highestIndex = 0.00;
+    int lowestIndex = 0.00; 
 
     printf("\n===============================\n");
     printf("      Employee Report\n");
@@ -67,9 +67,9 @@ void employeeReport(int employeeIDs[], char names[][50], float salaries[], int c
 
 void budgetReport(char departments[][50], float budgets[], float spent[], int count)
 {
-    float totalBudget = 0;
-    float totalSpent = 0;
-    float remaining= 0;
+    float totalBudget = 0.00;
+    float totalSpent = 0.00;
+    float remaining= 0.00;
     int exceededCount = 0;
 
     printf("\n===============================\n");
