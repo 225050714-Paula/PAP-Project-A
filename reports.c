@@ -107,7 +107,7 @@ void budgetReport(char departments[][50], float budgets[], float spent[], int co
     printf("--------------------------------\n");
     printf("Total allocated budget: %.2f\n", totalBudget);
     printf("Total expenditure: %.2f\n", totalSpent);
-    printf("Total remaining budget: %.2f\n", totalRemaining);
+    printf("Total remaining budget: %.2f\n", remaining);
     printf("Number of departments exceeding budget: %d\n", exceededCount);
 
     if (exceededCount > 0)
