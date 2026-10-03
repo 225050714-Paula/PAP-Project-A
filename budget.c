@@ -120,3 +120,35 @@ void checkBudget()
 
     printf("\nDepartments exceeding budget: %d\n", exceededCount);
 }
+
+void budgetMenu(void)
+{
+    int choice;
+
+    do
+    {
+        printf("\n========== BUDGET MANAGEMENT ==========\n");
+        printf("1. Add Budget Information\n");
+        printf("2. Display Budgets\n");
+        printf("3. Check Budget\n");
+        printf("4. Back to Main Menu\n");
+        printf("Enter your choice: ");
+
+        if (scanf("%d", &choice) != 1)
+        {
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF) { }
+            choice = 0;
+        }
+
+        switch (choice)
+        {
+            case 1: addBudget();      break;
+            case 2: displayBudgets(); break;
+            case 3: checkBudget();    break;
+            case 4: printf("\nReturning to main menu...\n"); break;
+            default: printf("\nInvalid choice. Please try again.\n");
+        }
+
+    } while (choice != 4);
+}
