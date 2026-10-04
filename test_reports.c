@@ -8,7 +8,7 @@ int main(void)
    char employeeNames[3][50] = {"Anna Smith", "John Doe", "Maria Nangolo"};
    float employeeSalaries[3] = {50000.00, 60000.00, 55000.00};
 
-   char departments[3][50] = {"HR", "FINANACE", "IT"};
+   char departments[3][100] = {"HR", "FINANCE", "IT"};
    float departmentBudgets[3] = {100000.00, 150000.00, 200000.00};
    float departmentSpent[3] = {90000.00, 160000.00, 180000.00};
 
@@ -25,7 +25,7 @@ int main(void)
 
    employeeReport(employeeIDs, employeeNames, employeeSalaries, 3);
    budgetReport(departments, departmentBudgets, departmentSpent, 3);
-   supplierReport(supplierNames, supplierEmails, supplierPhones, supplierTowns, 2);
+   supplierReport(supplierNames, supplierEmails, supplierPhones, supplierTowns, 3);
    assetReport(assetNames, assetValues, 3);
 
    return 0;
