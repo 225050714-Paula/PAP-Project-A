@@ -65,7 +65,7 @@ void employeeReport(int employeeIDs[], char names[][100], float salaries[], int 
     printf("Lowest salary: %.2f (Employee: %s)\n", lowest, names[lowestIndex]);
 }
 
-void budgetReport(char departments[][50], float budgets[], float spent[], int count)
+void budgetReport(char departments[][100], float budgets[], float spent[], int count)
 {
     float totalBudget = 0.00;
     float totalSpent = 0.00;
@@ -123,7 +123,7 @@ void budgetReport(char departments[][50], float budgets[], float spent[], int co
     }
 }
 
-void supplierReport(char names[][100], char emails[][100], char phones[][30], char towns[][50], int count)
+void supplierReport(char names[][100], char emails[][100], char phones[][30], char towns[][100], int count)
 {
     printf("\n===============================\n");
     printf("     Supplier Report\n");
