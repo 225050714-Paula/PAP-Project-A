@@ -6,6 +6,12 @@ void supplierMenu(void);
 void assetMenu(void);
 void displayReportsMenu(void);
 
+void clearInput(void)
+{
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) { }
+}
+
 void displayMenu(void)
 {
     printf("\n-------------- MUNICIPAL FINANCIAL MANAGEMENT SYSTEM --------------\n");
@@ -24,23 +30,26 @@ int main(void)
     do
     {
         displayMenu();
-
         printf("Enter your choice: ");
+
         if (scanf("%d", &choice) != 1)
         {
-            /* Not a number: clear the bad input and ask again */
-            int c;
-            while ((c = getchar()) != '\n' && c != EOF) { }
-            printf("\nInvalid input. Please enter a number from 1 to 6.\n");
+            /* user typed a letter or symbol */
+            clearInput();
+            printf("\nInvalid choice. Please enter a number from 1 to 6.\n");
+            printf("Press Enter to continue...");
+            getchar();
             choice = 0;
             continue;
         }
+
+        clearInput();   
 
         switch (choice)
         {
             case 1: employeeMenu();
                    break;
-            case 2: budgetMenu(); 
+            case 2: budgetMenu();
                    break;
             case 3: supplierMenu();
                    break;
@@ -48,11 +57,12 @@ int main(void)
                    break;
             case 5: displayReportsMenu();
                    break;
-            case 6:
-                printf("\n------------ Thank you for using the system. ------------\n");
-                break;
+            case 6: printf("\nThank you for using the system.\n");
+                 break;
             default:
                 printf("\nInvalid choice. Please enter a number from 1 to 6.\n");
+                printf("Press Enter to continue...");
+                getchar();
         }
 
     } while (choice != 6);
