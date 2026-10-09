@@ -1,35 +1,41 @@
 #include <stdio.h>
 #include "reports.h"
 
-void displayReportsMenu(void)
-{
-    printf("\n");
-    printf("===============================\n");
-    printf(" Municipal Financial Management\n");
-    printf("    REPORTS\n");
-    printf("===============================\n");
-    printf("1. Employee Report\n");
-    printf("2. Budget Report\n");
-    printf("3. Supplier Report\n");
-    printf("4. Asset Report\n");
-    printf("5. Back\n");
-    printf("Enter choice: ");
-}
+/* Data owned by the other modules */
+extern int employeeCount;
+extern int employeeIDs[];
+extern char employeeNames[][100];
+extern float basicSalary[];
+extern float housingAllowance[];
+extern float transportAllowance[];
 
-void employeeReport(int employeeIDs[], char names[][50], float salaries[], int count)
+extern int departmentCount;
+extern char departmentNames[][100];
+extern float allocatedBudgets[];
+extern float expenditures[];
+
+extern int supplierCount;
+extern char supplierNames[][100];
+extern char supplierEmails[][100];
+extern char supplierPhones[][30];
+extern char supplierTowns[][100];
+
+void assetMenuReport(void);   /* defined at the bottom of assets.c */
+
+void employeeReport(int employeeIDs[], char names[][100], float salaries[], int count)
 {
     float totalSalaries = 0.00;
     float average;
     float highest;
     float lowest;
-    int highestIndex = 0.00;
-    int lowestIndex = 0.00;
+    int highestIndex = 0;
+    int lowestIndex = 0;
 
     printf("\n===============================\n");
     printf("      Employee Report\n");
     printf("===============================\n");
 
-    if (count <= 0) 
+    if (count <= 0)
     {
         printf("No employees to report on.\n");
         return;
@@ -54,7 +60,7 @@ void employeeReport(int employeeIDs[], char names[][50], float salaries[], int c
             lowestIndex = i;
         }
     }
-    
+
     average = totalSalaries / count;
 
     printf("--------------------------------\n");
@@ -65,18 +71,18 @@ void employeeReport(int employeeIDs[], char names[][50], float salaries[], int c
     printf("Lowest salary: %.2f (Employee: %s)\n", lowest, names[lowestIndex]);
 }
 
-void budgetReport(char departments[][50], float budgets[], float spent[], int count)
+void budgetReport(char departments[][100], float budgets[], float spent[], int count)
 {
     float totalBudget = 0.00;
     float totalSpent = 0.00;
-    float remaining= 0.00;
+    float remaining = 0.00;
     int exceededCount = 0;
 
     printf("\n===============================\n");
     printf("     Budget Report\n");
     printf("===============================\n");
 
-    if (count <= 0) 
+    if (count <= 0)
     {
         printf("No departments to report on.\n");
         return;
@@ -123,13 +129,13 @@ void budgetReport(char departments[][50], float budgets[], float spent[], int co
     }
 }
 
-void supplierReport(char names[][100], char emails[][100], char phones[][30], char towns[][50], int count)
+void supplierReport(char names[][100], char emails[][100], char phones[][30], char towns[][100], int count)
 {
     printf("\n===============================\n");
     printf("     Supplier Report\n");
     printf("===============================\n");
 
-    if (count <= 0) 
+    if (count <= 0)
     {
         printf("No suppliers to report on.\n");
         return;
@@ -151,17 +157,17 @@ void assetReport(char assetNames[][50], float values[], int count)
     float lowestValue = 0;
     int highestIndex = 0;
     int lowestIndex = 0;
-    
+
     printf("\n===============================\n");
     printf("     Asset Report\n");
     printf("===============================\n");
 
-    if (count <= 0) 
+    if (count <= 0)
     {
         printf("No assets to report on.\n");
         return;
     }
-    
+
     highestValue = values[0];
     lowestValue = values[0];
 
@@ -188,4 +194,59 @@ void assetReport(char assetNames[][50], float values[], int count)
     printf("Total asset value: %.2f\n", totalAssetValue);
     printf("Highest asset value: %.2f (Asset: %s)\n", highestValue, assetNames[highestIndex]);
     printf("Lowest asset value: %.2f (Asset: %s)\n", lowestValue, assetNames[lowestIndex]);
+}
+
+void displayReportsMenu(void)
+{
+    int choice;
+
+    do
+    {
+        printf("\n===============================\n");
+        printf(" Municipal Financial Management\n");
+        printf("    REPORTS\n");
+        printf("===============================\n");
+        printf("1. Employee Report\n");
+        printf("2. Budget Report\n");
+        printf("3. Supplier Report\n");
+        printf("4. Asset Report\n");
+        printf("5. Back\n");
+        printf("Enter choice: ");
+
+        if (scanf("%d", &choice) != 1)
+        {
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF) { }
+            choice = 0;
+        }
+
+        switch (choice)
+        {
+            case 1:
+            {
+                /* total salary = basic + housing + transport */
+                float totals[50];
+                int n = employeeCount > 50 ? 50 : employeeCount;
+                for (int i = 0; i < n; i++)
+                    totals[i] = basicSalary[i] + housingAllowance[i] + transportAllowance[i];
+
+                employeeReport(employeeIDs, employeeNames, totals, n);
+                break;
+            }
+            case 2:
+                budgetReport(departmentNames, allocatedBudgets, expenditures, departmentCount);
+                break;
+            case 3:
+                supplierReport(supplierNames, supplierEmails, supplierPhones, supplierTowns, supplierCount);
+                break;
+            case 4:
+                assetMenuReport();
+                break;
+            case 5:
+                printf("\nReturning to main menu...\n");
+                break;
+            default:
+                printf("\nInvalid choice. Please try again.\n");
+        }
+    } while (choice != 5);
 }

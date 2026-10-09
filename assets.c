@@ -1,3 +1,5 @@
+#include <string.h>
+#include "reports.h"
 #include <stdio.h>
 #include <string.h>
 #include "assets.h"
@@ -132,4 +134,19 @@ void assetMenu(void)
         }
 
     } while (choice != 4);
+}
+
+void assetMenuReport(void)
+{
+    char names[MAX_ASSETS][50];
+    float values[MAX_ASSETS];
+
+    for (int i = 0; i < assetCount; i++)
+    {
+        strncpy(names[i], assets[i].assetName, 49);
+        names[i][49] = '\0';
+        values[i] = assets[i].purchaseValue;
+    }
+
+    assetReport(names, values, assetCount);
 }
