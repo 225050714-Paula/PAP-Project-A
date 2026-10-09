@@ -150,7 +150,7 @@ void supplierReport(char names[][100], char emails[][100], char phones[][30], ch
     printf("Number of suppliers: %d\n", count);
 }
 
-void assetReport(char assetNames[][50], float values[], int count)
+void assetReport(char assetNames[][100], float values[], int count)
 {
     float totalAssetValue = 0;
     float highestValue = 0;

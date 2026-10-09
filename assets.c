@@ -138,13 +138,13 @@ void assetMenu(void)
 
 void assetMenuReport(void)
 {
-    char names[MAX_ASSETS][50];
+    char names[MAX_ASSETS][100];
     float values[MAX_ASSETS];
 
     for (int i = 0; i < assetCount; i++)
     {
-        strncpy(names[i], assets[i].assetName, 49);
-        names[i][49] = '\0';
+        strncpy(names[i], assets[i].assetName, 99);
+        names[i][99] = '\0';
         values[i] = assets[i].purchaseValue;
     }
 
