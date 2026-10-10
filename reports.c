@@ -195,3 +195,58 @@ void assetReport(char assetNames[][100], float values[], int count)
     printf("Highest asset value: %.2f (Asset: %s)\n", highestValue, assetNames[highestIndex]);
     printf("Lowest asset value: %.2f (Asset: %s)\n", lowestValue, assetNames[lowestIndex]);
 }
+
+void displayReportsMenu(void)
+{
+    int choice;
+
+    do
+    {
+        printf("\n===============================\n");
+        printf(" Municipal Financial Management\n");
+        printf("    REPORTS\n");
+        printf("===============================\n");
+        printf("1. Employee Report\n");
+        printf("2. Budget Report\n");
+        printf("3. Supplier Report\n");
+        printf("4. Asset Report\n");
+        printf("5. Back\n");
+        printf("Enter choice: ");
+
+        if (scanf("%d", &choice) != 1)
+        {
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF) { }
+            choice = 0;
+        }
+
+        switch (choice)
+        {
+            case 1:
+            {
+                /* total salary = basic + housing + transport */
+                float totals[50];
+                int n = employeeCount > 50 ? 50 : employeeCount;
+                for (int i = 0; i < n; i++)
+                    totals[i] = basicSalary[i] + housingAllowance[i] + transportAllowance[i];
+
+                employeeReport(employeeIDs, employeeNames, totals, n);
+                break;
+            }
+            case 2:
+                budgetReport(departmentNames, allocatedBudgets, expenditures, departmentCount);
+                break;
+            case 3:
+                supplierReport(supplierNames, supplierEmails, supplierPhones, supplierTowns, supplierCount);
+                break;
+            case 4:
+                assetMenuReport();
+                break;
+            case 5:
+                printf("\nReturning to main menu...\n");
+                break;
+            default:
+                printf("\nInvalid choice. Please try again.\n");
+        }
+    } while (choice != 5);
+}
